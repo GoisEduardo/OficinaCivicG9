@@ -1,0 +1,10 @@
+<Solution>
+  <Project Path="Desafio01_CheckIn/Desafio01_CheckIn.csproj" />
+  <Project Path="Desafio02_CalculadoraPecas/Desafio02_CalculadoraPecas.csproj" />
+  <Project Path="Desafio03_ConversorPressao/Desafio03_ConversorPressao.csproj" />
+  <Project Path="Desafio04_PainelDeManutencao/Desafio04_PainelDeManutencao.csproj" Id="7f79eca0-122e-4421-8557-ec9d193b428c" />
+  <Project Path="Desafio05_POO/Desafio05_POO.csproj" Id="ccd14749-8634-48ca-bee8-cec878e281d1" />
+  <Project Path="Desafio06_AtualizarQuilometragem/Desafio06_AtualizarQuilometragem.csproj" Id="5967e241-bbc9-4a79-b4dd-8bcad9fa8215" />
+  <Project Path="Desafio07_IntegirdadeAPersistencia/Desafio07_IntegirdadeAPersistencia.csproj" Id="c0d38f2a-994c-4fed-aade-c58c5d3240d4" />
+  <Project Path="Desafio08_DadosOficina/Desafio08_DadosOficina.csproj" Id="1af8c6c7-5602-4b1b-ba0b-c69bb4942871" />
+</Solution>
