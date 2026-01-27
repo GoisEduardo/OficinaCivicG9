@@ -19,3 +19,7 @@ Este projeto é um laboratório de estudos focado em fundamentos avançados de C
 ### 4. Boas Práticas
 - Uso de **Primary Constructors** e **Switch Expressions** (C# 12).
 - Separação de responsabilidades em métodos estáticos.
+
+### 5. Consultas Inteligentes com LINQ
+- Utilizei **LINQ** para realizar filtros dinâmicos por marca (`Where`).
+- Implementei **Agregações de Dados** (`Sum`, `Max`, `Count`) para gerar métricas financeiras da oficina em tempo real.

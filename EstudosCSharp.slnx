@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="README.md" />
+  </Folder>
   <Project Path="Desafio01_CheckIn/Desafio01_CheckIn.csproj" />
   <Project Path="Desafio02_CalculadoraPecas/Desafio02_CalculadoraPecas.csproj" />
   <Project Path="Desafio03_ConversorPressao/Desafio03_ConversorPressao.csproj" />
@@ -7,4 +10,5 @@
   <Project Path="Desafio06_AtualizarQuilometragem/Desafio06_AtualizarQuilometragem.csproj" Id="5967e241-bbc9-4a79-b4dd-8bcad9fa8215" />
   <Project Path="Desafio07_IntegirdadeAPersistencia/Desafio07_IntegirdadeAPersistencia.csproj" Id="c0d38f2a-994c-4fed-aade-c58c5d3240d4" />
   <Project Path="Desafio08_DadosOficina/Desafio08_DadosOficina.csproj" Id="1af8c6c7-5602-4b1b-ba0b-c69bb4942871" />
+  <Project Path="Desafio09_Linq/Desafio09_Linq.csproj" Id="1ff30a24-f014-4207-bbc5-9abae3954160" />
 </Solution>

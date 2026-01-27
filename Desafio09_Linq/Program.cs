@@ -1,7 +1,7 @@
 ﻿using Desafio05_POO;
 using System.Text.Json;
 
-namespace Desafio08_DadosOficina;
+namespace Desafio09_Linq;
 
 public class Program
 {
@@ -48,20 +48,22 @@ public class Program
                 3 => ExibirPecas(dados.Pecas),
                 4 => AdicionarPecas(dados.Pecas),
                 5 => AtualizarKm(dados.Carro),
-                6 => SalvarESair(dados, caminhoArquivo),
+                6 => FiltrarPorMarca(dados.Pecas),
+                7 => SalvarESair(dados, caminhoArquivo),
+                9 => ExibirMetrica(dados.Pecas),
                 _ => "Opção não reconhecida pelo sistema."
             };
 
             Console.WriteLine(servico);
 
-            if (escolha != 6)
+            if (escolha != 7)
             {
                 Console.WriteLine("\nPressione qualquer tecla para voltar ao menu");
                 Console.ReadKey();
                 Console.Clear();
             }
 
-        } while (escolha != 6); // O loop para quando escolha for 3
+        } while (escolha != 7); // O loop para quando escolha for 3
     }
 
     private static string OpcaoDeMenu()
@@ -76,7 +78,8 @@ public class Program
         Console.WriteLine("3 - Verificar revisão de peças.");
         Console.WriteLine("4 - Adicionar peças a lista de revisão.");
         Console.WriteLine("5 - Atualizar quilometragem.");
-        Console.WriteLine("6 - Sair \n");
+        Console.WriteLine("6 - Filtrar por Marca.");
+        Console.WriteLine("7 - Sair \n");
         Console.Write("Digite opção desejada: ");
         string opcao = Console.ReadLine()!;
         Console.Clear();
@@ -157,4 +160,42 @@ public class Program
         File.WriteAllText(caminhoArquivo, jsonParaSalvar);
         return "Dados salvos, Saindo do sistema...";
     }
+
+    private static string FiltrarPorMarca(List<Peca> pecas)
+    {
+        Console.Write("Qual marca deseja pesquisar: ");
+        string marca = Console.ReadLine()!;
+
+        IEnumerable<Peca> itensPorMarca = pecas.Where(x => x.Marca.Contains(marca, StringComparison.OrdinalIgnoreCase));
+
+        foreach (var item in itensPorMarca)
+        {
+            Console.WriteLine($"- {item.Nome,-20} | {item.Marca,-10} | {item.Valor:C2}");
+        }
+
+        return "Peças filtradas com sucesso";
+    }
+
+    private static string ExibirMetrica(List<Peca> pecas)
+    {
+        if (!pecas.Any())
+        {
+            return "Nenhuma peça cadastrada para gerar métricas";
+        }
+
+        decimal total = pecas.Sum(x => x.Valor);
+        decimal quantidade = pecas.Count;
+
+        //Aqui pegamos o objeto inteiro que tem o valor máximo
+        Peca pecaMaisCara = pecas.OrderByDescending(x => x.Valor).First();
+
+        Console.WriteLine("======= ESTATÍSTICAS DA OFICINA =======");
+        Console.WriteLine($"Total investido: {total:C2}");
+        Console.WriteLine($"Qtd. de itens:   {quantidade}");
+        Console.WriteLine($"Item de luxo:    {pecaMaisCara.Nome} ({pecaMaisCara.Valor:C2})");
+        Console.WriteLine("=======================================\n");
+
+        return "Relatório gerado com sucesso.";
+    }
 }
+
