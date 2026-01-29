@@ -1,25 +1,40 @@
-﻿# 🚗 Oficina do Civic G9 - Sistema de Manutenção em C#
+﻿# 🚗 Oficina Multi-Veículos - Gestão de Manutenção com C#
 
-Este projeto é um laboratório de estudos focado em fundamentos avançados de C# .NET Core, simulando o controle de manutenção de um Honda Civic G9.
+Este projeto evoluiu de um laboratório de estudos focado no meu Honda Civic G9 para um sistema robusto de gerenciamento de garagem, explorando padrões arquiteturais, resiliência de software e persistência polimórfica.
 
 ## 🧠 Aprendizados e "Pulos do Gato"
 
-### 1. Orientação a Objetos e Estado
-- Implementei a classe `Veiculo` para encapsular regras de negócio (como o cálculo de troca de óleo).
-- Aprendi a diferença entre a **Classe** (planta) e o **Objeto** (o carro vivo na memória).
+### 1. Interfaces e Polimorfismo (`IVeiculo`)
+- **Abstração:** Saí de uma classe única para um contrato de interface, permitindo que o sistema gerencie tanto **Carros** quanto **Motos** de forma padronizada.
+- **Regras de Negócio Dinâmicas:** Implementação de lógicas distintas (Troca de óleo a cada 10k km para carros e 3k km para motos) que são executadas automaticamente via polimorfismo, sem necessidade de `if/else` complexos no menu principal.
 
-### 2. O Mistério dos Construtores
-- **Construtor com Parâmetros:** Utilizado para garantir que nenhum veículo nasça sem dados essenciais.
-- **Construtor Vazio (`JsonConstructor`):** Essencial para o motor de serialização do .NET conseguir reconstruir o objeto a partir de um arquivo físico.
 
-### 3. Persistência de Dados (JSON)
-- Uso de `System.Text.Json` para salvar o estado completo da oficina (`DadosOficina`) em um arquivo `.json`.
-- Implementação de lógica de carregamento automático ao iniciar o sistema.
 
-### 4. Boas Práticas
-- Uso de **Primary Constructors** e **Switch Expressions** (C# 12).
-- Separação de responsabilidades em métodos estáticos.
+### 2. Persistência Polimórfica com JSON
+- **`JsonDerivedType`:** Uso de discriminadores de tipo para que o motor de serialização do .NET identifique se o dado no arquivo `oficina.json` deve instanciar um `Carro` ou uma `Moto`.
+- **Injeção de Dados:** Uso de construtores específicos para reconstruir objetos complexos mantendo a integridade do estado anterior.
 
-### 5. Consultas Inteligentes com LINQ
-- Utilizei **LINQ** para realizar filtros dinâmicos por marca (`Where`).
-- Implementei **Agregações de Dados** (`Sum`, `Max`, `Count`) para gerar métricas financeiras da oficina em tempo real.
+### 3. Resiliência e Tratamento de Exceções
+- **Custom Exceptions:** Criação da `KmInvalidaException`, uma exceção de negócio personalizada para impedir a entrada de quilometragem inconsistente (retroativa).
+- **Programação Defensiva:** Implementação de blocos `try-catch` para garantir que o sistema se recupere caso o arquivo de dados esteja corrompido, carregando um estado inicial seguro via método auxiliar.
+
+
+
+### 4. Consultas Inteligentes com LINQ
+- **Métricas Financeiras:** Utilização de métodos de agregação (`Sum`, `Max`, `Count`) para gerar relatórios de gastos em tempo real.
+- **Filtros Dinâmicos:** Uso de `Where` para buscar peças e marcas específicas dentro de coleções de objetos.
+
+### 5. Boas Práticas e C# Moderno
+- **Parâmetros `out`:** Utilizados para gerenciar a troca de estado (veículo focado) entre métodos de forma elegante.
+- **Primary Constructors & Switch Expressions:** Código mais limpo e legível utilizando as últimas novidades do C# 12/13.
+
+
+
+## 🛠️ Tecnologias e Conceitos
+- **Linguagem:** C# (.NET 9)
+- **Serialização:** System.Text.Json (Polymorphic Serialization)
+- **Paradigma:** Orientação a Objetos Avançada
+- **Versionamento:** Git/GitHub
+
+---
+*Projeto desenvolvido como parte de um roadmap de evolução técnica focado em desenvolvimento backend .NET.*

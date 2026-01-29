@@ -14,10 +14,12 @@ public class Moto(string modelo, decimal quilometragemAtual, decimal ultimaTroca
 
     public void AtualizaKm(decimal novaKm)
     {
-        if(novaKm > QuilometragemAtual)
+        if (novaKm < QuilometragemAtual)
         {
-            QuilometragemAtual = novaKm;
+            throw new KmInvalidaException($"A nova Km ({novaKm}) não pode ser menor que a atual ({QuilometragemAtual})");
         }
+
+        QuilometragemAtual = novaKm;
     }
 
     public bool PrecisaTrocarOleo()
