@@ -11,4 +11,5 @@
   <Project Path="Desafio07_IntegirdadeAPersistencia/Desafio07_IntegirdadeAPersistencia.csproj" Id="c0d38f2a-994c-4fed-aade-c58c5d3240d4" />
   <Project Path="Desafio08_DadosOficina/Desafio08_DadosOficina.csproj" Id="1af8c6c7-5602-4b1b-ba0b-c69bb4942871" />
   <Project Path="Desafio09_Linq/Desafio09_Linq.csproj" Id="1ff30a24-f014-4207-bbc5-9abae3954160" />
+  <Project Path="Desafio10_ImplementacaoInterface/Desafio10_ImplementacaoInterface.csproj" Id="9015770e-1d0d-4a2c-a040-ac2ebc389a7c" />
 </Solution>

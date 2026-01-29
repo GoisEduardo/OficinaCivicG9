@@ -1,7 +1,7 @@
 ﻿using Desafio05_POO;
 using System.Text.Json;
 
-namespace Desafio09_Linq;
+namespace Desafio10_ImplementacaoInterface;
 
 public class Program
 {
@@ -17,18 +17,23 @@ public class Program
         }
         else
         {
-            Carro carroInicial = new("Civic G9", 120000, 110000);
-            List<Peca> pecasIniciais = 
+            List<IVeiculo> veiculoIniciais = [new Carro("Civic G9", 120000, 110000)];
+            veiculoIniciais.Add(new Carro("Civic G8", 150000, 100000));
+            veiculoIniciais.Add(new Moto("CB 500", 10000, 9000));
+
+            List<Peca> pecasIniciais =
             [
                 new Peca("Filtro de Óleo", "Cofap", 19.90m),
                 new Peca("Pastilha de Freio", "Bosch", 150.00m),
                 new Peca("Amortecedor", "Monroe", 450.00m)
             ];
 
-            dados = new DadosOficina(carroInicial, pecasIniciais);
+            dados = new DadosOficina(veiculoIniciais, pecasIniciais);
         }
 
-        int escolha = 0;
+        IVeiculo veiculoFocado = dados.Veiculos[0];
+
+        int escolha;
 
         do
         {
@@ -42,27 +47,28 @@ public class Program
 
             string servico = escolha switch
             {
-                1 => TrocarOleo(dados.Veiculos),
+                1 => TrocarOleo(veiculoFocado),
                 2 => ConversorDePressao(),
                 3 => ExibirPecas(dados.Pecas),
                 4 => AdicionarPecas(dados.Pecas),
-                5 => AtualizarKm(dados.Veiculos),
+                5 => AtualizarKm(veiculoFocado),
                 6 => FiltrarPorMarca(dados.Pecas),
-                7 => SalvarESair(dados, caminhoArquivo),
+                7 => MenuSelecaoVeiculo(dados.Veiculos, out veiculoFocado), // Usando 'out' para atualizar a variável
+                8 => SalvarESair(dados, caminhoArquivo),
                 9 => ExibirMetrica(dados.Pecas),
                 _ => "Opção não reconhecida pelo sistema."
             };
 
             Console.WriteLine(servico);
 
-            if (escolha != 7)
+            if (escolha != 8)
             {
                 Console.WriteLine("\nPressione qualquer tecla para voltar ao menu");
                 Console.ReadKey();
                 Console.Clear();
             }
 
-        } while (escolha != 7); // O loop para quando escolha for 3
+        } while (escolha != 8); // O loop para quando escolha for 3
     }
 
     private static string OpcaoDeMenu()
@@ -78,7 +84,8 @@ public class Program
         Console.WriteLine("4 - Adicionar peças a lista de revisão.");
         Console.WriteLine("5 - Atualizar quilometragem.");
         Console.WriteLine("6 - Filtrar por Marca.");
-        Console.WriteLine("7 - Sair \n");
+        Console.WriteLine("7 - Selecionar Veículo.");
+        Console.WriteLine("8 - Sair \n");
         Console.Write("Digite opção desejada: ");
         string opcao = Console.ReadLine()!;
         Console.Clear();
@@ -125,7 +132,7 @@ public class Program
         return "Peça adicionada com sucesso ao inventário";
     }
 
-    private static string TrocarOleo(Carro carro)
+    private static string TrocarOleo(IVeiculo carro)
     {
         if (carro.PrecisaTrocarOleo())
         {
@@ -135,7 +142,7 @@ public class Program
         return "Alerta: Troca de oleo em dia!";
     }
 
-    private static string AtualizarKm(Carro carro)
+    private static string AtualizarKm(IVeiculo carro)
     {
         Console.Write("Digite os Km do veiculo por gentileza: ");
         string quilometragemAtual = Console.ReadLine()!;
@@ -196,5 +203,24 @@ public class Program
 
         return "Relatório gerado com sucesso.";
     }
-}
 
+    private static string MenuSelecaoVeiculo(List<IVeiculo> veiculos, out IVeiculo veiculoFocado)
+    {
+        Console.WriteLine("--- Garagem Disponível ---");
+        for (int i = 0; i < veiculos.Count; i++)
+        {
+            Console.WriteLine($"{i + 1} - { veiculos[i].Modelo} ({veiculos[i].GetType().Name})");
+        }
+
+        Console.Write("\nSelecione o número do veículo: ");
+
+        if (int.TryParse(Console.ReadLine(), out int  index) && index > 0 && index <= veiculos.Count)
+        {
+            veiculoFocado = veiculos[index - 1]; // Atualiza a variável do Main
+            return $"Sucesso: Você agora está gerenciando o {veiculoFocado.Modelo}.";
+        }
+
+        veiculoFocado = veiculos[0]; // Fallback caso o usuário erre
+        return "Seleção inválida. Mantendo veículo anterior.";
+    }
+}

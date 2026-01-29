@@ -8,12 +8,12 @@ public class Program
     public static void Main(string[] args)
     {
         string caminhoArquivo = "veiculo.json";
-        Veiculo carro;
+        Carro carro;
 
         if (File.Exists(caminhoArquivo))
         {
             string jsonRecuparado = File.ReadAllText(caminhoArquivo);
-            carro = JsonSerializer.Deserialize<Veiculo>(jsonRecuparado)!;
+            carro = JsonSerializer.Deserialize<Carro>(jsonRecuparado)!;
         }
         else
         {
@@ -111,7 +111,7 @@ public class Program
         return "Peça adicionada com sucesso";
     }
 
-    private static string TrocarOleo(Veiculo carro)
+    private static string TrocarOleo(Carro carro)
     {
         if (carro.PrecisaTrocarOleo())
         {
@@ -121,7 +121,7 @@ public class Program
         return "Alerta: Troca de oleo em dia!";
     }
 
-    private static string AtualizarKm(Veiculo carro)
+    private static string AtualizarKm(Carro carro)
     {
         Console.Write("Digite os Km do veiculo por gentileza: ");
         string quilometragemAtual = Console.ReadLine()!;
@@ -136,7 +136,7 @@ public class Program
         return "Quilometragem atualizada com sucesso";
     }
 
-    private static string SalvarESair(Veiculo carro, string caminhoArquivo)
+    private static string SalvarESair(Carro carro, string caminhoArquivo)
     {
         string jsonParaSalvar = JsonSerializer.Serialize(carro);
         File.WriteAllText(caminhoArquivo, jsonParaSalvar);

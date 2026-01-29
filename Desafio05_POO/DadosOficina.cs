@@ -2,16 +2,16 @@
 
 public class DadosOficina
 {
-    public Veiculo Carro { get; set; }
+    public List<IVeiculo> Veiculos { get; set; }
     public List<Peca> Pecas { get; set; }
 
     public DadosOficina()
     { 
     }
 
-    public DadosOficina(Veiculo carro, List<Peca> pecas)
+    public DadosOficina(List<IVeiculo> veiculos, List<Peca> pecas)
     {
-        Carro = carro;
+        Veiculos = veiculos;
         Pecas = pecas;
     }
 }

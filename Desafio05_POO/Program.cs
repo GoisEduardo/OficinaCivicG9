@@ -8,7 +8,7 @@ public class Program
     {
         int escolha = 0;
         List<string> pecasParaRevisao = ["Filtro de Óleo", "Pastilha de Freio", "Filtro de Cabine", "Velas de Ignição"];
-        Veiculo carro = new("Civic", 120000, 110000);
+        Carro carro = new("Civic", 120000, 110000);
 
         do
         {
@@ -60,7 +60,7 @@ public class Program
         return opcao;
     }
 
-    private static string TrocarOleo(Veiculo carro)
+    private static string TrocarOleo(Carro carro)
     {
         if (carro.PrecisaTrocarOleo())
         {

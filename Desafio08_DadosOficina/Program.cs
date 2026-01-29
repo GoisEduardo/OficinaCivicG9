@@ -17,7 +17,7 @@ public class Program
         }
         else
         {
-            Veiculo carroInicial = new("Civic G9", 120000, 110000);
+            Carro carroInicial = new("Civic G9", 120000, 110000);
             List<Peca> pecasIniciais = new List<Peca>
             {
                 new Peca("Filtro de Óleo", "Cofap", 19.90m),
@@ -43,11 +43,11 @@ public class Program
 
             string servico = escolha switch
             {
-                1 => TrocarOleo(dados.Carro),
+                1 => TrocarOleo(dados.Veiculos),
                 2 => ConversorDePressao(),
                 3 => ExibirPecas(dados.Pecas),
                 4 => AdicionarPecas(dados.Pecas),
-                5 => AtualizarKm(dados.Carro),
+                5 => AtualizarKm(dados.Veiculos),
                 6 => SalvarESair(dados, caminhoArquivo),
                 _ => "Opção não reconhecida pelo sistema."
             };
@@ -123,7 +123,7 @@ public class Program
         return "Peça adicionada com sucesso ao inventário";
     }
 
-    private static string TrocarOleo(Veiculo carro)
+    private static string TrocarOleo(Carro carro)
     {
         if (carro.PrecisaTrocarOleo())
         {
@@ -133,7 +133,7 @@ public class Program
         return "Alerta: Troca de oleo em dia!";
     }
 
-    private static string AtualizarKm(Veiculo carro)
+    private static string AtualizarKm(Carro carro)
     {
         Console.Write("Digite os Km do veiculo por gentileza: ");
         string quilometragemAtual = Console.ReadLine()!;
